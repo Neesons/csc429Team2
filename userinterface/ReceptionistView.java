@@ -67,14 +67,13 @@ public class ReceptionistView extends View
 
 		// create a container for showing the contents
 		VBox container = new VBox(10);
-                container.setStyle("-fx-background-color: gold");
 		container.setPadding(new Insets(15, 5, 5, 5));
 
 		// Add a title for this panel
 		container.getChildren().add(createTitle());
 		
 		// how do you add white space?
-		//container.getChildren().add(new Label(" "));
+		container.getChildren().add(new Label(" "));
 
 		// create our GUI components, add them to this Container
 		container.getChildren().add(createFormContents());
@@ -93,25 +92,31 @@ public class ReceptionistView extends View
 	private VBox createTitle()
 	{
 		VBox container = new VBox(10);
-                
-		Text clientText = new Text("OFFICE OF CAREER SERVICES");
-		clientText.setFont(Font.font("Copperplate", FontWeight.EXTRA_BOLD, 25));
+		
+		Text clientText = new Text(" Office of Career Services ");
+		clientText.setFont(Font.font("Arial", FontWeight.BOLD, 24));
 		clientText.setWrappingWidth(350);
 		clientText.setTextAlignment(TextAlignment.CENTER);
 		clientText.setFill(Color.DARKGREEN);
 		container.getChildren().add(clientText);
 
 		Text titleText = new Text(" Professional Clothes Closet Management System ");
-		titleText.setFont(Font.font("Comic Sans", FontWeight.THIN, 25));
+		titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 		titleText.setWrappingWidth(350);
 		titleText.setTextAlignment(TextAlignment.CENTER);
 		titleText.setFill(Color.DARKGREEN);
 		container.getChildren().add(titleText);
 
                 //bport icon
-                ImageView bportIcon = new ImageView(new Image("/images/bporteagle.png",250,175,false,true));
+                ImageView bportIcon = new ImageView(new Image("/images/shield.JPG",160,160,true,true));
                 container.getChildren().add(bportIcon);
                 
+		Text inquiryText = new Text("       MAIN MENU       ");
+		inquiryText.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+		inquiryText.setWrappingWidth(350);
+		inquiryText.setTextAlignment(TextAlignment.CENTER);
+		inquiryText.setFill(Color.BLACK);
+		container.getChildren().add(inquiryText);
                 container.setAlignment(Pos.CENTER);
                 
 		return container;
@@ -128,11 +133,11 @@ public class ReceptionistView extends View
 		// create the buttons, listen for events, add them to the container
 		HBox checkoutCont = new HBox(10);
 		checkoutCont.setAlignment(Pos.CENTER);
-                ImageView icon = new ImageView(new Image("/images/buyingcolor.png"));
-                icon.setFitHeight(20);
-                icon.setFitWidth(20);
+                ImageView icon = new ImageView(new Image("/images/checkout.png"));
+                icon.setFitHeight(15);
+                icon.setFitWidth(15);
 		checkoutClothingItemButton = new Button("Checkout Clothing Item", icon);
-		checkoutClothingItemButton.setFont(Font.font("Comic Sans", FontWeight.THIN, 14));
+		checkoutClothingItemButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		checkoutClothingItemButton.setOnAction(new EventHandler<ActionEvent>() {
 
        		     @Override
@@ -147,13 +152,13 @@ public class ReceptionistView extends View
 		HBox articleTypeCont = new HBox(10);
 		articleTypeCont.setAlignment(Pos.CENTER_LEFT);
 		Label atLabel = new Label("  Article Types: ");
-		atLabel.setFont(Font.font("Comic Sans", FontWeight.THIN, 14));
+		atLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		articleTypeCont.getChildren().add(atLabel);
-                icon = new ImageView(new Image("/images/pluscolor.png"));
+                icon = new ImageView(new Image("/images/plus.png"));
                 icon.setFitHeight(15);
                 icon.setFitWidth(15);
 		addArticleTypeButton = new Button("Add",icon);
-		addArticleTypeButton.setFont(Font.font("Comic Sans", FontWeight.THIN, 14));
+		addArticleTypeButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		addArticleTypeButton.setOnAction(new EventHandler<ActionEvent>() {
 
        		     @Override
@@ -163,11 +168,11 @@ public class ReceptionistView extends View
         	});
 		articleTypeCont.getChildren().add(addArticleTypeButton);
 		
-                icon = new ImageView(new Image("/images/editcolor.png"));
+                icon = new ImageView(new Image("/images/edit.png"));
                 icon.setFitHeight(15);
                 icon.setFitWidth(15);
 		updateArticleTypeButton = new Button("Update", icon);
-		updateArticleTypeButton.setFont(Font.font("Comic Sans", FontWeight.THIN, 14));
+		updateArticleTypeButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		updateArticleTypeButton.setOnAction(new EventHandler<ActionEvent>() {
 
        		     @Override
@@ -176,11 +181,11 @@ public class ReceptionistView extends View
             	     }
         	});
 		articleTypeCont.getChildren().add(updateArticleTypeButton);
-                icon = new ImageView(new Image("/images/trashcolor.png"));
+                icon = new ImageView(new Image("/images/trash.png"));
                 icon.setFitHeight(15);
                 icon.setFitWidth(15);
 		removeArticleTypeButton = new Button("Remove", icon);
-		removeArticleTypeButton.setFont(Font.font("Comic Sans", FontWeight.THIN, 14));
+		removeArticleTypeButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		removeArticleTypeButton.setOnAction(new EventHandler<ActionEvent>() {
 
        		     @Override
@@ -194,14 +199,14 @@ public class ReceptionistView extends View
 		
 		HBox colorCont = new HBox(10);
 		colorCont.setAlignment(Pos.CENTER_LEFT);
-		Label colorLabel = new Label("            Colors: ");
-		colorLabel.setFont(Font.font("Comic Sans", FontWeight.THIN, 14));
+		Label colorLabel = new Label("             Colors: ");
+		colorLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		colorCont.getChildren().add(colorLabel);
-                icon = new ImageView(new Image("/images/pluscolor.png"));
+                icon = new ImageView(new Image("/images/plus.png"));
                 icon.setFitHeight(15);
                 icon.setFitWidth(15);
 		addColorButton = new Button("Add", icon);
-		addColorButton.setFont(Font.font("Comic Sans", FontWeight.THIN, 14));
+		addColorButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		addColorButton.setOnAction(new EventHandler<ActionEvent>() {
 
        		     @Override
@@ -210,11 +215,11 @@ public class ReceptionistView extends View
             	     }
         	});
 		colorCont.getChildren().add(addColorButton);
-		icon = new ImageView(new Image("/images/editcolor.png"));
+		icon = new ImageView(new Image("/images/edit.png"));
                 icon.setFitHeight(15);
                 icon.setFitWidth(15);
 		updateColorButton = new Button("Update", icon);
-		updateColorButton.setFont(Font.font("Comic Sans", FontWeight.THIN, 14));
+		updateColorButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		updateColorButton.setOnAction(new EventHandler<ActionEvent>() {
 
        		     @Override
@@ -223,11 +228,11 @@ public class ReceptionistView extends View
             	     }
         	});
 		colorCont.getChildren().add(updateColorButton);
-                icon = new ImageView(new Image("/images/trashcolor.png"));
+                icon = new ImageView(new Image("/images/trash.png"));
                 icon.setFitHeight(15);
                 icon.setFitWidth(15);
 		removeColorButton = new Button("Remove",icon);
-		removeColorButton.setFont(Font.font("Comic Sans", FontWeight.THIN, 14));
+		removeColorButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		removeColorButton.setOnAction(new EventHandler<ActionEvent>() {
 
        		     @Override
@@ -241,14 +246,14 @@ public class ReceptionistView extends View
 		
 		HBox clothingItemCont = new HBox(10);
 		clothingItemCont.setAlignment(Pos.CENTER_LEFT);
-		Label ciLabel = new Label("Clothing Items:");
-		ciLabel.setFont(Font.font("Comic Sans", FontWeight.THIN, 14));
+		Label ciLabel = new Label("Clothing Items: ");
+		ciLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		clothingItemCont.getChildren().add(ciLabel);
-                icon = new ImageView(new Image("/images/pluscolor.png"));
+                icon = new ImageView(new Image("/images/plus.png"));
                 icon.setFitHeight(15);
                 icon.setFitWidth(15);
 		addClothingItemButton = new Button("Add", icon);
-		addClothingItemButton.setFont(Font.font("Comic Sans", FontWeight.THIN, 14));
+		addClothingItemButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		addClothingItemButton.setOnAction(new EventHandler<ActionEvent>() {
 
        		     @Override
@@ -257,11 +262,11 @@ public class ReceptionistView extends View
             	     }
         	});
 		clothingItemCont.getChildren().add(addClothingItemButton);
-		icon = new ImageView(new Image("/images/editcolor.png"));
+		icon = new ImageView(new Image("/images/edit.png"));
                 icon.setFitHeight(15);
                 icon.setFitWidth(15);
 		updateClothingItemButton = new Button("Update",icon);
-		updateClothingItemButton.setFont(Font.font("Comic Sans", FontWeight.THIN, 14));
+		updateClothingItemButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		updateClothingItemButton.setOnAction(new EventHandler<ActionEvent>() {
 
        		     @Override
@@ -270,11 +275,11 @@ public class ReceptionistView extends View
             	     }
         	});
 		clothingItemCont.getChildren().add(updateClothingItemButton);
-                icon = new ImageView(new Image("/images/trashcolor.png"));
+                icon = new ImageView(new Image("/images/trash.png"));
                 icon.setFitHeight(15);
                 icon.setFitWidth(15);
 		removeClothingItemButton = new Button("Remove", icon);
-		removeClothingItemButton.setFont(Font.font("Comic Sans", FontWeight.THIN, 14));
+		removeClothingItemButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		removeClothingItemButton.setOnAction(new EventHandler<ActionEvent>() {
 
        		     @Override
@@ -288,15 +293,14 @@ public class ReceptionistView extends View
 		
 		HBox requestCont = new HBox(10);
 		requestCont.setAlignment(Pos.CENTER_LEFT);
-		Label reqLabel = new Label("        Requests: ");
-		reqLabel.setFont(Font.font("Comic Sans", FontWeight.THIN, 14));
+		Label reqLabel = new Label("         Requests: ");
+		reqLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		requestCont.getChildren().add(reqLabel);
-                icon = new ImageView(new Image("/images/logcolor.png"));
+                icon = new ImageView(new Image("/images/log.png"));
                 icon.setFitHeight(15);
                 icon.setFitWidth(15);
 		logRequestButton = new Button("Log", icon);
-                logRequestButton.setMinWidth(65);
-		logRequestButton.setFont(Font.font("Comic Sans", FontWeight.THIN, 14));
+		logRequestButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		logRequestButton.setOnAction(new EventHandler<ActionEvent>() {
 
        		     @Override
@@ -305,12 +309,11 @@ public class ReceptionistView extends View
             	     }
         	});
 		requestCont.getChildren().add(logRequestButton);
-		icon = new ImageView(new Image("/images/entercolor.png"));
+		icon = new ImageView(new Image("/images/enter.png"));
                 icon.setFitHeight(15);
                 icon.setFitWidth(15);
 		fulfillRequestButton = new Button(" Fulfill ", icon);
-                fulfillRequestButton.setMinWidth(85);
-		fulfillRequestButton.setFont(Font.font("Comic Sans", FontWeight.THIN, 14));
+		fulfillRequestButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		fulfillRequestButton.setOnAction(new EventHandler<ActionEvent>() {
 
        		     @Override
@@ -319,11 +322,11 @@ public class ReceptionistView extends View
             	     }
         	});
 		requestCont.getChildren().add(fulfillRequestButton);
-                icon = new ImageView(new Image("/images/trashcolor.png"));
+                icon = new ImageView(new Image("/images/trash.png"));
                 icon.setFitHeight(15);
                 icon.setFitWidth(15);
 		removeRequestButton = new Button("Remove",icon);
-		removeRequestButton.setFont(Font.font("Comic Sans", FontWeight.THIN, 14));
+		removeRequestButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		removeRequestButton.setOnAction(new EventHandler<ActionEvent>() {
 
        		     @Override
@@ -337,11 +340,11 @@ public class ReceptionistView extends View
 		
 		HBox listAvailCont = new HBox(10);
 		listAvailCont.setAlignment(Pos.CENTER);
-                icon = new ImageView(new Image("/images/listcolor.png"));
+                icon = new ImageView(new Image("/images/list.png"));
                 icon.setFitHeight(15);
                 icon.setFitWidth(15);
 		listAvailableInventoryButton = new Button("List Available Inventory",icon);
-		listAvailableInventoryButton.setFont(Font.font("Comic Sans", FontWeight.THIN, 14));
+		listAvailableInventoryButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		listAvailableInventoryButton.setOnAction(new EventHandler<ActionEvent>() {
 
        		     @Override
@@ -355,11 +358,11 @@ public class ReceptionistView extends View
 
 		HBox doneCont = new HBox(10);
 		doneCont.setAlignment(Pos.CENTER);
-                icon = new ImageView(new Image("/images/exitcolor.png"));
+                icon = new ImageView(new Image("/images/exit.png"));
                 icon.setFitHeight(15);
                 icon.setFitWidth(15);
 		cancelButton = new Button("Exit System",icon);
-		cancelButton.setFont(Font.font("Comic Sans", FontWeight.THIN, 14));
+		cancelButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
 
        		     @Override

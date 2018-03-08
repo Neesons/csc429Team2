@@ -27,10 +27,31 @@ public class ViewFactory {
 		{
 			return new SearchArticleTypeView(model);
 		}
-                else if(viewName.equals("RemoveArticleTypeView") == true)
+		else if(viewName.equals("RemoveArticleTypeView") == true)
 		{
 			return new RemoveArticleTypeView(model);
-		} /*
+		}
+		else if(viewName.equals("AddColorView") == true)
+		{
+			return new AddColorView(model);
+		}
+		else if(viewName.equals("ModifyColorView") == true)
+		{
+			return new ModifyColorView(model);
+		}
+		else if(viewName.equals("ColorCollectionView") == true)
+		{
+			return new ColorCollectionView(model);
+		}
+		else if(viewName.equals("SearchColorView") == true)
+		{
+			return new SearchColorView(model);
+		}
+		else if(viewName.equals("RemoveColorView") == true)
+		{
+			return new RemoveColorView(model);
+		}
+		/*
 		else if(viewName.equals("DepositTransactionView") == true)
 		{
 			return new DepositTransactionView(model);
@@ -63,10 +84,10 @@ public class ViewFactory {
 		{
 			return new DepositReceipt(model);
 		}
-		else if(viewName.equals("InventoryCollectionView") == true)
+		else if(viewName.equals("TransferReceipt") == true)
 		{
-			return new InventoryCollectionView(model);
-		}*/
+			return new TransferReceipt(model);
+		} */
 		else
 			return null;
 	}

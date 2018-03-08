@@ -222,4 +222,3 @@ public class RemoveArticleTypeTransaction extends Transaction
 	}
 
 }
-

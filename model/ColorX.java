@@ -22,9 +22,9 @@ import userinterface.ViewFactory;
  * application 
  */
 //==============================================================
-public class Color extends EntityBase implements IView
+public class ColorX extends EntityBase implements IView
 {
-	private static final String myTableName = "color";
+	private static final String myTableName = "Color";
 
 	protected Properties dependencies;
 
@@ -33,7 +33,7 @@ public class Color extends EntityBase implements IView
 
 	// constructor for this class
 	//----------------------------------------------------------
-	public Color(String barcodePrefix) throws InvalidPrimaryKeyException, MultiplePrimaryKeysException
+	public ColorX(String barcodePrefix) throws InvalidPrimaryKeyException, MultiplePrimaryKeysException
 	{
 		super(myTableName);
 
@@ -59,20 +59,20 @@ public class Color extends EntityBase implements IView
 			if (size != 1)
 			{
 				
-				throw new MultiplePrimaryKeysException("Multiple color matching barcode prefix : "
+				throw new MultiplePrimaryKeysException("Multiple colors matching barcode prefix : "
 					+ barcodePrefix + " found.");
 			}
 			else
 			{
 				// copy all the retrieved data into persistent state
-				Properties retrievedATData = allDataRetrieved.elementAt(0);
+				Properties retrievedCData = allDataRetrieved.elementAt(0);
 				persistentState = new Properties();
 
-				Enumeration allKeys = retrievedATData.propertyNames();
+				Enumeration allKeys = retrievedCData.propertyNames();
 				while (allKeys.hasMoreElements() == true)
 				{
 					String nextKey = (String)allKeys.nextElement();
-					String nextValue = retrievedATData.getProperty(nextKey);
+					String nextValue = retrievedCData.getProperty(nextKey);
 					// accountNumber = Integer.parseInt(retrievedAccountData.getProperty("accountNumber"));
 
 					if (nextValue != null)
@@ -95,7 +95,7 @@ public class Color extends EntityBase implements IView
 	 * Alternate constructor. Can be used to create a NEW Color
 	 */
 	//----------------------------------------------------------
-	public Color(Properties props)
+	public ColorX(Properties props)
 	{
 		super(myTableName);
 
@@ -150,7 +150,7 @@ public class Color extends EntityBase implements IView
 
 	
 	//-----------------------------------------------------------------------------------
-	public static int compare(Color a, Color b)
+	public static int compare(ColorX a, ColorX b)
 	{
 		String aVal = (String)a.getState("Description");
 		String bVal = (String)b.getState("Description");
@@ -163,6 +163,11 @@ public class Color extends EntityBase implements IView
 	{
 		updateStateInDatabase();
 	}
+	
+	public void remove()
+	{
+         removeStateInDatabase();
+    }
 	
 	//-----------------------------------------------------------------------------------
 	private void updateStateInDatabase() 
@@ -188,6 +193,26 @@ public class Color extends EntityBase implements IView
 		catch (SQLException ex)
 		{
 			updateStatusMessage = "Error in installing color data in database!";
+		}
+		//DEBUG System.out.println("updateStateInDatabase " + updateStatusMessage);
+	}
+	
+	private void removeStateInDatabase() 
+	{
+		try
+		{
+			if (persistentState.getProperty("ID") != null)
+			{
+				Properties whereClause = new Properties();
+				whereClause.setProperty("ID", persistentState.getProperty("ID"));
+				updatePersistentState(mySchema, persistentState, whereClause);
+				updateStatusMessage = "Color with prefix : " + persistentState.getProperty("BarcodePrefix") + " removed successfully!";
+			}
+			
+		}
+		catch (SQLException ex)
+		{
+			updateStatusMessage = "Error in removing color data in database!";
 		}
 		//DEBUG System.out.println("updateStateInDatabase " + updateStatusMessage);
 	}
@@ -219,4 +244,3 @@ public class Color extends EntityBase implements IView
 		}
 	}
 }
-

@@ -27,14 +27,12 @@ import java.util.Properties;
 
 // project imports
 import impresario.IModel;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
-/** The class containing the Search Article Type View  for the Professional Clothes
+/** The class containing the Search Color View  for the Professional Clothes
  *  Closet application 
  */
 //==============================================================
-public class SearchArticleTypeView extends View
+public class SearchColorView extends View
 {
 
 	// GUI components
@@ -50,9 +48,9 @@ public class SearchArticleTypeView extends View
 
 	// constructor for this class -- takes a model object
 	//----------------------------------------------------------
-	public SearchArticleTypeView(IModel at)
+	public SearchColorView(IModel at)
 	{
-		super(at, "SearchArticleTypeView");
+		super(at, "SearchColorView");
 
 		// create a container for showing the contents
 		VBox container = new VBox(10);
@@ -76,7 +74,7 @@ public class SearchArticleTypeView extends View
 	//-------------------------------------------------------------
 	protected String getActionText()
 	{
-		return "** Search for Article Type **";
+		return "** Search for Color **";
 	}
 
 	// Create the title container
@@ -130,25 +128,18 @@ public class SearchArticleTypeView extends View
 	{
 		VBox vbox = new VBox(10);
 		
-                Text blankText = new Text("  ");
-		blankText.setFont(Font.font("Arial", FontWeight.BOLD, 24));
-		blankText.setWrappingWidth(350);
-		blankText.setTextAlignment(TextAlignment.CENTER);
-		blankText.setFill(Color.WHITE);
-		vbox.getChildren().add(blankText);
-                
-		Text prompt1 = new Text("Enter Article Type Barcode Prefix (if known)");
-                prompt1.setWrappingWidth(400);
-                prompt1.setTextAlignment(TextAlignment.CENTER);
-                prompt1.setFill(Color.BLACK);
+		Text prompt1 = new Text("Enter Color Barcode Prefix (if known)");
+        prompt1.setWrappingWidth(400);
+        prompt1.setTextAlignment(TextAlignment.CENTER);
+        prompt1.setFill(Color.BLACK);
 		prompt1.setFont(Font.font("Arial", FontWeight.BOLD, 18));
 		vbox.getChildren().add(prompt1);
 		
 		GridPane grid0 = new GridPane();
 		grid0.setAlignment(Pos.CENTER);
-                grid0.setHgap(10);
-                grid0.setVgap(10);
-                grid0.setPadding(new Insets(0, 25, 10, 0));
+       	grid0.setHgap(10);
+        grid0.setVgap(10);
+        grid0.setPadding(new Insets(0, 25, 10, 0));
 		
 		Text barcodePrefixLabel = new Text(" Barcode Prefix : ");
 		Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
@@ -168,7 +159,7 @@ public class SearchArticleTypeView extends View
 					if (bcPrfx.length() > 0)
 					{
 						props.setProperty("BarcodePrefix", bcPrfx);
-						myModel.stateChangeRequest("SearchArticleType", props); 
+						myModel.stateChangeRequest("SearchColor", props); 
 					}
 			}
 		});
@@ -177,17 +168,17 @@ public class SearchArticleTypeView extends View
 		vbox.getChildren().add(grid0);
 		
 		Text prompt2 = new Text(" - Otherwise, enter other criteria below - ");
-                prompt2.setWrappingWidth(400);
-                prompt2.setTextAlignment(TextAlignment.CENTER);
-                prompt2.setFill(Color.BLACK);
+        prompt2.setWrappingWidth(400);
+        prompt2.setTextAlignment(TextAlignment.CENTER);
+        prompt2.setFill(Color.BLACK);
 		prompt2.setFont(Font.font("Arial", FontWeight.BOLD, 18));
 		vbox.getChildren().add(prompt2);
 
 		GridPane grid = new GridPane();
-                grid.setAlignment(Pos.CENTER);
-                grid.setHgap(10);
-                grid.setVgap(10);
-                grid.setPadding(new Insets(0, 25, 10, 0));
+        grid.setAlignment(Pos.CENTER);
+       	grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(0, 25, 10, 0));
 
 		Text descripLabel = new Text(" Description : ");
 		descripLabel.setFont(myFont);
@@ -207,7 +198,7 @@ public class SearchArticleTypeView extends View
 					props.setProperty("Description", descrip);
 					String alfaC = alphaCode.getText();
 					props.setProperty("AlphaCode", alfaC);
-					myModel.stateChangeRequest("SearchArticleType", props); 
+					myModel.stateChangeRequest("SearchColor", props); 
 					
 			}
 		});
@@ -224,10 +215,7 @@ public class SearchArticleTypeView extends View
 
 		HBox doneCont = new HBox(10);
 		doneCont.setAlignment(Pos.CENTER);
-                ImageView icon = new ImageView(new Image("/images/check.png"));
-                icon.setFitHeight(15);
-                icon.setFitWidth(15);
-		submitButton = new Button("Submit",icon);
+		submitButton = new Button("Submit");
 		submitButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		submitButton.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -239,7 +227,7 @@ public class SearchArticleTypeView extends View
 					if (bcPrfx.length() > 0)
 					{
 						props.setProperty("BarcodePrefix", bcPrfx);
-						myModel.stateChangeRequest("SearchArticleType", props); 
+						myModel.stateChangeRequest("SearchColor", props); 
 					}
 					else
 					{
@@ -247,22 +235,20 @@ public class SearchArticleTypeView extends View
 						props.setProperty("Description", descrip);
 						String alfaC = alphaCode.getText();
 						props.setProperty("AlphaCode", alfaC);
-						myModel.stateChangeRequest("SearchArticleType", props); 
+						myModel.stateChangeRequest("SearchColor", props); 
 					}
 			}
 		});
 		doneCont.getChildren().add(submitButton);
-		icon = new ImageView(new Image("/images/return.png"));
-                icon.setFitHeight(15);
-                icon.setFitWidth(15);
-		cancelButton = new Button("Return",icon);
+		
+		cancelButton = new Button("Return");
 		cancelButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
 
        		     @Override
        		     public void handle(ActionEvent e) {
        		    	clearErrorMessage();
-       		    	myModel.stateChangeRequest("CancelSearchArticleType", null);   
+       		    	myModel.stateChangeRequest("CancelSearchColor", null);   
             	  }
         	});
 		doneCont.getChildren().add(cancelButton);

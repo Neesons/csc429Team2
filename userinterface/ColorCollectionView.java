@@ -38,13 +38,13 @@ import java.util.Enumeration;
 
 // project imports
 import impresario.IModel;
-import model.ArticleType;
-import model.ArticleTypeCollection;
+import model.*;
+import model.ColorCollection;
 
 //==============================================================================
-public class ArticleTypeCollectionView extends View
+public class ColorCollectionView extends View
 {
-	protected TableView<ArticleTypeTableModel> tableOfArticleTypes;
+	protected TableView<ColorTableModel> tableOfColors;
 	protected Button cancelButton;
 	protected Button submitButton;
 
@@ -52,9 +52,9 @@ public class ArticleTypeCollectionView extends View
 
 
 	//--------------------------------------------------------------------------
-	public ArticleTypeCollectionView(IModel matt)
+	public ColorCollectionView(IModel mct)
 	{
-		super(matt, "ArticleTypeCollectionView");
+		super(mct, "ColorCollectionView");
 
 		// create a container for showing the contents
 		VBox container = new VBox(10);
@@ -82,13 +82,13 @@ public class ArticleTypeCollectionView extends View
 	protected void getEntryTableModelValues()
 	{
 		
-		ObservableList<ArticleTypeTableModel> tableData = FXCollections.observableArrayList();
+		ObservableList<ColorTableModel> tableData = FXCollections.observableArrayList();
 		try
 		{
-			ArticleTypeCollection articleTypeCollection = 
-				(ArticleTypeCollection)myModel.getState("ArticleTypeList");
+			ColorCollection colorCollection = 
+				(ColorCollection)myModel.getState("ColorList");
 
-	 		Vector entryList = (Vector)articleTypeCollection.getState("ArticleTypes");
+	 		Vector entryList = (Vector)colorCollection.getState("Colors");
 			
 			if (entryList.size() > 0)
 			{
@@ -96,11 +96,12 @@ public class ArticleTypeCollectionView extends View
 
 				while (entries.hasMoreElements() == true)
 				{
-					ArticleType nextAT = (ArticleType)entries.nextElement();
-					Vector<String> view = nextAT.getEntryListView();
+					ColorX nextColor = (ColorX)entries.nextElement();
+					Vector<String> view = nextColor.getEntryListView();
+					//ERROR: cannot find symbol nextColor
 
 					// add this list entry to the list
-					ArticleTypeTableModel nextTableRowData = new ArticleTypeTableModel(view);
+					ColorTableModel nextTableRowData = new ColorTableModel(view);
 					tableData.add(nextTableRowData);
 					
 				}
@@ -110,7 +111,7 @@ public class ArticleTypeCollectionView extends View
 				displayMessage("No matching entries found!");
 			}
 			
-			tableOfArticleTypes.setItems(tableData);
+			tableOfColors.setItems(tableData);
 		}
 		catch (Exception e) {//SQLException e) {
 			// Need to handle this exception
@@ -152,7 +153,7 @@ public class ArticleTypeCollectionView extends View
 		blankText.setFill(Color.WHITE);
 		container.getChildren().add(blankText);
                 
-		Text actionText = new Text("      ** Matching Article Types **       ");
+		Text actionText = new Text("      ** Matching Colors **       ");
 		actionText.setFont(Font.font("Arial", FontWeight.BOLD, 18));
 		actionText.setWrappingWidth(350);
 		actionText.setTextAlignment(TextAlignment.CENTER);
@@ -173,38 +174,38 @@ public class ArticleTypeCollectionView extends View
                 grid.setVgap(10);
                 grid.setPadding(new Insets(0, 25, 10, 0));
 
-		tableOfArticleTypes = new TableView<ArticleTypeTableModel>();
-		tableOfArticleTypes.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		tableOfColors = new TableView<ColorTableModel>();
+		tableOfColors.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 	
 		TableColumn barcodePrefixColumn = new TableColumn("Barcode Prefix") ;
 		barcodePrefixColumn.setMinWidth(50);
 		barcodePrefixColumn.setCellValueFactory(
-	                new PropertyValueFactory<ArticleTypeTableModel, String>("barcodePrefix"));
+	                new PropertyValueFactory<ColorTableModel, String>("barcodePrefix"));
 		
 		TableColumn descriptionColumn = new TableColumn("Description") ;
 		descriptionColumn.setMinWidth(150);
 		descriptionColumn.setCellValueFactory(
-	                new PropertyValueFactory<ArticleTypeTableModel, String>("description"));
+	                new PropertyValueFactory<ColorTableModel, String>("description"));
 		  
 		TableColumn alphaCodeColumn = new TableColumn("Alpha Code") ;
 		alphaCodeColumn.setMinWidth(50);
 		alphaCodeColumn.setCellValueFactory(
-	                new PropertyValueFactory<ArticleTypeTableModel, String>("alphaCode"));
+	                new PropertyValueFactory<ColorTableModel, String>("alphaCode"));
 		
 		TableColumn statusColumn = new TableColumn("Status") ;
 		statusColumn.setMinWidth(50);
 		statusColumn.setCellValueFactory(
-	                new PropertyValueFactory<ArticleTypeTableModel, String>("status"));
+	                new PropertyValueFactory<ColorTableModel, String>("status"));
 
-		tableOfArticleTypes.getColumns().addAll(descriptionColumn, 
+		tableOfColors.getColumns().addAll(descriptionColumn, 
 			barcodePrefixColumn, alphaCodeColumn, statusColumn);
 
-		tableOfArticleTypes.setOnMousePressed(new EventHandler<MouseEvent>() {
+		tableOfColors.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event)
 			{
 				if (event.isPrimaryButtonDown() && event.getClickCount() >=2 ){
-					processArticleTypeSelected();
+					processColorSelected();
 				}
 			}
 		});
@@ -219,7 +220,7 @@ public class ArticleTypeCollectionView extends View
        		     public void handle(ActionEvent e) {
        		     	clearErrorMessage(); 
 					// do the inquiry
-					processArticleTypeSelected();
+					processColorSelected();
 					
             	 }
         	});
@@ -241,7 +242,7 @@ public class ArticleTypeCollectionView extends View
 			 		*/
 					//----------------------------------------------------------
        		     	clearErrorMessage();
-       		     	myModel.stateChangeRequest("CancelArticleTypeList", null); 
+       		     	myModel.stateChangeRequest("CancelColorList", null); 
             	  }
         	});
 
@@ -251,8 +252,8 @@ public class ArticleTypeCollectionView extends View
 		btnContainer.getChildren().add(cancelButton);
 		
 		vbox.getChildren().add(grid);
-                tableOfArticleTypes.setPrefHeight(250);
-		vbox.getChildren().add(tableOfArticleTypes);
+                tableOfColors.setPrefHeight(250);
+		vbox.getChildren().add(tableOfColors);
 		vbox.getChildren().add(btnContainer);
 	
 		return vbox;
@@ -264,15 +265,15 @@ public class ArticleTypeCollectionView extends View
 	}
 
 	//--------------------------------------------------------------------------
-	protected void processArticleTypeSelected()
+	protected void processColorSelected()
 	{
-		ArticleTypeTableModel selectedItem = tableOfArticleTypes.getSelectionModel().getSelectedItem();
+		ColorTableModel selectedItem = tableOfColors.getSelectionModel().getSelectedItem();
 		
 		if(selectedItem != null)
 		{
 			String selectedBarcodePrefix = selectedItem.getBarcodePrefix();
 
-			myModel.stateChangeRequest("ArticleTypeSelected", selectedBarcodePrefix);
+			myModel.stateChangeRequest("ColorSelected", selectedBarcodePrefix);
 		}
 	}
 

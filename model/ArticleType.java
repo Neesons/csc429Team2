@@ -238,4 +238,3 @@ public class ArticleType extends EntityBase implements IView
 		}
 	}
 }
-

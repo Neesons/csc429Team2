@@ -27,14 +27,12 @@ import java.util.Properties;
 
 // project imports
 import impresario.IModel;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
-/** The class containing the Search Article Type View  for the Professional Clothes
+/** The class containing the Add Color View  for the Professional Clothes
  *  Closet application 
  */
 //==============================================================
-public class SearchArticleTypeView extends View
+public class AddColorView extends View
 {
 
 	// GUI components
@@ -50,9 +48,9 @@ public class SearchArticleTypeView extends View
 
 	// constructor for this class -- takes a model object
 	//----------------------------------------------------------
-	public SearchArticleTypeView(IModel at)
+	public AddColorView(IModel at)
 	{
-		super(at, "SearchArticleTypeView");
+		super(at, "AddColorView");
 
 		// create a container for showing the contents
 		VBox container = new VBox(10);
@@ -76,7 +74,7 @@ public class SearchArticleTypeView extends View
 	//-------------------------------------------------------------
 	protected String getActionText()
 	{
-		return "** Search for Article Type **";
+		return "** Adding a new Color **";
 	}
 
 	// Create the title container
@@ -130,104 +128,51 @@ public class SearchArticleTypeView extends View
 	{
 		VBox vbox = new VBox(10);
 		
-                Text blankText = new Text("  ");
-		blankText.setFont(Font.font("Arial", FontWeight.BOLD, 24));
-		blankText.setWrappingWidth(350);
-		blankText.setTextAlignment(TextAlignment.CENTER);
-		blankText.setFill(Color.WHITE);
-		vbox.getChildren().add(blankText);
-                
-		Text prompt1 = new Text("Enter Article Type Barcode Prefix (if known)");
-                prompt1.setWrappingWidth(400);
-                prompt1.setTextAlignment(TextAlignment.CENTER);
-                prompt1.setFill(Color.BLACK);
-		prompt1.setFont(Font.font("Arial", FontWeight.BOLD, 18));
-		vbox.getChildren().add(prompt1);
+		Text prompt = new Text("COLOR INFORMATION");
+        prompt.setWrappingWidth(400);
+        prompt.setTextAlignment(TextAlignment.CENTER);
+        prompt.setFill(Color.BLACK);
+		prompt.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+		vbox.getChildren().add(prompt);
 		
-		GridPane grid0 = new GridPane();
-		grid0.setAlignment(Pos.CENTER);
-                grid0.setHgap(10);
-                grid0.setVgap(10);
-                grid0.setPadding(new Insets(0, 25, 10, 0));
-		
+
+		GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+       	grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(0, 25, 10, 0));
+
 		Text barcodePrefixLabel = new Text(" Barcode Prefix : ");
 		Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
 		barcodePrefixLabel.setFont(myFont);
 		barcodePrefixLabel.setWrappingWidth(150);
 		barcodePrefixLabel.setTextAlignment(TextAlignment.RIGHT);
-		grid0.add(barcodePrefixLabel, 0, 1);
+		grid.add(barcodePrefixLabel, 0, 1);
 
 		barcodePrefix = new TextField();
-		barcodePrefix.setOnAction(new EventHandler<ActionEvent>() {
-
-       		     @Override
-       		     public void handle(ActionEvent e) {
-       		    	clearErrorMessage();
-					Properties props = new Properties();
-					String bcPrfx = barcodePrefix.getText();
-					if (bcPrfx.length() > 0)
-					{
-						props.setProperty("BarcodePrefix", bcPrfx);
-						myModel.stateChangeRequest("SearchArticleType", props); 
-					}
-			}
-		});
-		grid0.add(barcodePrefix, 1, 1);
-		
-		vbox.getChildren().add(grid0);
-		
-		Text prompt2 = new Text(" - Otherwise, enter other criteria below - ");
-                prompt2.setWrappingWidth(400);
-                prompt2.setTextAlignment(TextAlignment.CENTER);
-                prompt2.setFill(Color.BLACK);
-		prompt2.setFont(Font.font("Arial", FontWeight.BOLD, 18));
-		vbox.getChildren().add(prompt2);
-
-		GridPane grid = new GridPane();
-                grid.setAlignment(Pos.CENTER);
-                grid.setHgap(10);
-                grid.setVgap(10);
-                grid.setPadding(new Insets(0, 25, 10, 0));
+		grid.add(barcodePrefix, 1, 1);
 
 		Text descripLabel = new Text(" Description : ");
 		descripLabel.setFont(myFont);
 		descripLabel.setWrappingWidth(150);
 		descripLabel.setTextAlignment(TextAlignment.RIGHT);
-		grid.add(descripLabel, 0, 1);
+		grid.add(descripLabel, 0, 2);
 
 		description = new TextField();
-		description.setOnAction(new EventHandler<ActionEvent>() {
-
-       		     @Override
-       		     public void handle(ActionEvent e) {
-       		    	clearErrorMessage();
-					Properties props = new Properties();
-					
-					String descrip = description.getText();
-					props.setProperty("Description", descrip);
-					String alfaC = alphaCode.getText();
-					props.setProperty("AlphaCode", alfaC);
-					myModel.stateChangeRequest("SearchArticleType", props); 
-					
-			}
-		});
-		grid.add(description, 1, 1);
+		grid.add(description, 1, 2);
 
 		Text alphaCodeLabel = new Text(" Alpha Code : ");
 		alphaCodeLabel.setFont(myFont);
 		alphaCodeLabel.setWrappingWidth(150);
 		alphaCodeLabel.setTextAlignment(TextAlignment.RIGHT);
-		grid.add(alphaCodeLabel, 0, 2);
+		grid.add(alphaCodeLabel, 0, 3);
 
 		alphaCode = new TextField();
-		grid.add(alphaCode, 1, 2);
+		grid.add(alphaCode, 1, 3);
 
 		HBox doneCont = new HBox(10);
 		doneCont.setAlignment(Pos.CENTER);
-                ImageView icon = new ImageView(new Image("/images/check.png"));
-                icon.setFitHeight(15);
-                icon.setFitWidth(15);
-		submitButton = new Button("Submit",icon);
+		submitButton = new Button("Submit");
 		submitButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		submitButton.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -239,30 +184,45 @@ public class SearchArticleTypeView extends View
 					if (bcPrfx.length() > 0)
 					{
 						props.setProperty("BarcodePrefix", bcPrfx);
-						myModel.stateChangeRequest("SearchArticleType", props); 
+						String descrip = description.getText();
+						if (descrip.length() > 0)
+						{
+							props.setProperty("Description", descrip);
+							String alfaC = alphaCode.getText();
+							if (alfaC.length() > 0)
+							{
+								props.setProperty("AlphaCode", alfaC);
+								myModel.stateChangeRequest("ColorData", props); 
+							}
+							else
+							{
+								displayErrorMessage("ERROR: Please enter a valid alpha code!");
+							}
+						}
+						else
+						{
+							displayErrorMessage("ERROR: Please enter a valid description!");
+						}
+						
 					}
 					else
 					{
-						String descrip = description.getText();
-						props.setProperty("Description", descrip);
-						String alfaC = alphaCode.getText();
-						props.setProperty("AlphaCode", alfaC);
-						myModel.stateChangeRequest("SearchArticleType", props); 
+						displayErrorMessage("ERROR: Please enter a barcode prefix!");
+						
 					}
-			}
-		});
+       		    	  
+            	  }
+        	});
 		doneCont.getChildren().add(submitButton);
-		icon = new ImageView(new Image("/images/return.png"));
-                icon.setFitHeight(15);
-                icon.setFitWidth(15);
-		cancelButton = new Button("Return",icon);
+		
+		cancelButton = new Button("Return");
 		cancelButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
 
        		     @Override
        		     public void handle(ActionEvent e) {
        		    	clearErrorMessage();
-       		    	myModel.stateChangeRequest("CancelSearchArticleType", null);   
+       		    	myModel.stateChangeRequest("CancelAddC", null);   
             	  }
         	});
 		doneCont.getChildren().add(cancelButton);

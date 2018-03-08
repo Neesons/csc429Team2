@@ -28,26 +28,26 @@ import java.util.Properties;
 // project imports
 import impresario.IModel;
 
-/** The class containing the Modify Article Type View  for the Professional Clothes
+/** The class containing the Modify Color View  for the Professional Clothes
  *  Closet application 
  */
 //==============================================================
-public class ModifyArticleTypeView extends AddArticleTypeView
+public class ModifyColorView extends AddColorView
 {
 
 	//
 
 	// constructor for this class -- takes a model object
 	//----------------------------------------------------------
-	public ModifyArticleTypeView(IModel at)
+	public ModifyColorView(IModel cr)
 	{
-		super(at);
+		super(cr);
 	}
 
 	//-------------------------------------------------------------
-	protected String getActionText()
+	protected String getActionText()	
 	{
-		return "** Modify Article Type Data **";
+		return "** Modify Color Data **";
 	}
 
 	//-------------------------------------------------------------

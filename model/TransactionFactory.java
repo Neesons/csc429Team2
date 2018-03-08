@@ -33,6 +33,11 @@ public class TransactionFactory
 			retValue = new UpdateArticleTypeTransaction();
 		}
 		else
+		if (transType.equals("RemoveArticleType") == true)
+		{
+			retValue = new RemoveArticleTypeTransaction();
+		}
+		else
 		if(transType.equals("AddColor") == true)
 		{
 			retValue = new AddColorTransaction();
@@ -42,15 +47,13 @@ public class TransactionFactory
 		{
 			retValue = new UpdateColorTransaction();
 		}
-                else
-                if(transType.equals("ListAvailableInventory") == true){
-                        retValue = new ListAvailableInventoryTransaction();
-                    }
-                else
-                    if(transType.equals("RemoveArticleType") == true){
-                        retValue = new RemoveArticleTypeTransaction();
-                    }
-                /*
+		else
+		if(transType.equals("RemoveColor") == true)
+		{
+			retValue = new RemoveColorTransaction();
+		}
+		
+		/*
 		else
 		if (transType.equals("Transfer") == true)
 		{
