@@ -221,5 +221,3 @@ public class RemoveColorTransaction extends Transaction
 	}
 
 }
-
-}

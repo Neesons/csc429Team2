@@ -22,34 +22,24 @@ public class TransactionFactory
 		throws Exception
 	{
 		Transaction retValue = null;
-
-		if (transType.equals("AddArticleType") == true)
-		{
+		if (transType.equals("AddArticleType") == true) {
 			retValue = new AddArticleTypeTransaction();
 		} 
-		else
-		if (transType.equals("UpdateArticleType") == true)
-		{
+		else if (transType.equals("UpdateArticleType") == true) {
 			retValue = new UpdateArticleTypeTransaction();
 		}
-		else
-		if(transType.equals("AddColor") == true)
-		{
+		else if(transType.equals("AddColor") == true) {
 			retValue = new AddColorTransaction();
 		}
-		else
-		if(transType.equals("UpdateColor") == true)
-		{
+		else if(transType.equals("UpdateColor") == true) {
 			retValue = new UpdateColorTransaction();
 		}
-                else
-                if(transType.equals("ListAvailableInventory") == true){
-                        retValue = new ListAvailableInventoryTransaction();
-                    }
-                else
-                    if(transType.equals("RemoveArticleType") == true){
-                        retValue = new RemoveArticleTypeTransaction();
-                    }
+		else if(transType.equals("ListAvailableInventory") == true) {
+			retValue = new ListAvailableInventoryTransaction();
+		}
+		else if(transType.equals("RemoveArticleType") == true) {
+			retValue = new RemoveArticleTypeTransaction();
+		}
                 /*
 		else
 		if (transType.equals("Transfer") == true)
